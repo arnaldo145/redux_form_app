@@ -4,9 +4,18 @@ import InitForm from './../components/InitForm'
 class App extends Component{
   render(){
     return(
-      <div>
+      <div className="col">
         <p>
-          <InitForm></InitForm>
+          <div className="card">
+            <div className="card-header">Redux form</div>
+            <div className="card-body">
+              <div className="card-title">My first Redux Form</div>
+              <InitForm></InitForm>
+            </div>
+          </div>
+          <div className="card-footer">
+            <p>Card footer</p>
+          </div>          
         </p>
     </div>
     );

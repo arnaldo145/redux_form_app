@@ -3,14 +3,20 @@ import { Field, reduxForm } from 'redux-form';
 
 const InitForm = props => {
   return(
-    <div>
       <form>
-        <div>
-          <label htmlFor="name">Name</label>
-          <Field name="name" placeholder="Enter your name" type="text" component="input"/>
+        <div className="form-group">
+          <label htmlFor="name">Enter your name:</label>
+          <Field name="name" 
+          placeholder="Enter your name" 
+          type="text" 
+          component="input"
+          className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <button className="btn btn-primary">Send</button>
         </div>
       </form>
-    </div>
   )
 };
 
