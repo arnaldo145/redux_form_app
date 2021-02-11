@@ -1,40 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { getInitialFetch } from './../actions';
 
-const InitForm = ({ onClick, onChangeName }) => {
-  return(
-    <form>
+class InitForm extends Component{
+  componentWillMount(){
+    this.props.fetchInitial();
+  }
 
-      <div className="form-group">
+  render(){
+    const { onClick, onChangeName } = this.props;
 
-        <label htmlFor="name">
-          Enter your name:
-        </label>
+    return(
+      <form>  
+        <div className="form-group">  
+          <label htmlFor="name">
+            Enter your name:
+          </label>  
+          <Field
+            name="name"
+            placeholder="Enter your name"
+            type="text"
+            component="input"
+            className="form-control"
+            onChange={onChangeName}
+            />  
+        </div>  
+        <div className="form-group">  
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={onClick}>Send</button>  
+        </div>  
+      </form>
+    )
+  }
+}
 
-        <Field
-          name="name"
-          placeholder="Enter your name"
-          type="text"
-          component="input"
-          className="form-control"
-          onChange={onChangeName}
-          />
+const mapStateToProps = (state) => {
+  return {
+    initialValues: state.name.data
+  }
+}
 
-      </div>
-
-      <div className="form-group">
-
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={onClick}>Send</button>
-
-      </div>
-
-    </form>
-  )
-};
-
-export default reduxForm({
-  form: 'initForm'
-})(InitForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchInitial: () => dispatch(getInitialFetch())
+  }
+}
+export default connect(
+  mapStateToProps, mapDispatchToProps
+) 
+(reduxForm({
+    form: 'initForm',
+    enableReinitialize: true
+})(InitForm));
